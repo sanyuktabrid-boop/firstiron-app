@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -184,4 +185,192 @@
 <script src="script.js"></script>
 
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>FirstIron And Laundry Services</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="text-center p-4 bg-light">
+  <img src="./logo.png" alt="FirstIron Logo" class="logo">
+  <h1>FirstIron</h1>
+  <p>Wash. Press. Wear</p>
+</header>
+
+<!-- NAV -->
+<nav class="text-center p-2 bg-dark">
+  <a href="#home" class="text-white m-2">Home</a>
+  <a href="#services" class="text-white m-2">Services</a>
+  <a href="#pricing" class="text-white m-2">Pricing</a>
+  <a href="#contact" class="text-white m-2">Contact</a>
+</nav>
+
+<!-- HOME -->
+<section id="home" class="section text-center p-5">
+
+  <div class="container bg-white rounded shadow p-4">
+
+    <h2 class="text-primary">Welcome to FirstIron</h2>
+
+    <p class="lead">
+      Fast, affordable, and reliable laundry service at your doorstep.
+    </p>
+
+    <button onclick="orderNow()" class="btn btn-primary btn-lg mt-3">
+      Book on WhatsApp
+    </button>
+
+  </div>
+
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="section p-5 bg-light">
+
+  <h2 class="text-center mb-4">Our Services</h2>
+
+  <ul class="list-group list-group-flush container">
+
+    <li class="list-group-item">✔ Laundry (Per Kg)</li>
+    <li class="list-group-item">✔ Wash & Press</li>
+    <li class="list-group-item">✔ Dry Cleaning</li>
+    <li class="list-group-item">✔ Ironing</li>
+    <li class="list-group-item">✔ Roll Press</li>
+    <li class="list-group-item">✔ Shoes Cleaning</li>
+    <li class="list-group-item">✔ Stain Removal</li>
+    <li class="list-group-item">✔ Express Delivery</li>
+
+  </ul>
+
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="section p-5">
+
+  <h2 class="text-center mb-4">Our Pricing</h2>
+
+  <div class="table-responsive container">
+
+    <table class="table table-bordered text-center">
+
+      <thead class="table-dark">
+        <tr>
+          <th>Service</th>
+          <th>Item</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr><td>Laundry</td><td>Per Kg</td><td>₹120</td></tr>
+        <tr><td>Wash & Press</td><td>Per Piece</td><td>₹50</td></tr>
+        <tr><td>Dry Cleaning</td><td>Shirt</td><td>₹80</td></tr>
+        <tr><td>Dry Cleaning</td><td>Trouser</td><td>₹100</td></tr>
+        <tr><td>Dry Cleaning</td><td>Suit</td><td>₹250</td></tr>
+        <tr><td>Dry Cleaning</td><td>Saree</td><td>₹350</td></tr>
+        <tr><td>Blanket</td><td>Wash</td><td>₹80</td></tr>
+        <tr><td>Bedsheet</td><td>Wash</td><td>₹80</td></tr>
+        <tr><td>Towel</td><td>Wash</td><td>₹50</td></tr>
+        <tr><td>Ironing</td><td>Per Item</td><td>₹8</td></tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <p class="text-center">
+    <b>Note:</b> Prices may vary based on fabric type.
+  </p>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section p-5 bg-light">
+
+  <h2 class="text-center mb-3">Book Pickup</h2>
+
+  <p class="text-center">Fill the form to schedule laundry pickup.</p>
+
+  <div class="container" style="max-width:500px;">
+
+    <form id="contactForm" onsubmit="submitForm(event); return false;">
+
+      <div class="mb-3">
+        <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+      </div>
+
+      <div class="mb-3">
+        <input type="email" id="email" class="form-control" placeholder="Your Email" required>
+      </div>
+
+      <div class="mb-3">
+        <input type="text" id="phone" class="form-control" placeholder="Phone Number" required>
+      </div>
+
+      <div class="mb-3">
+        <select id="service" class="form-select" required>
+          <option value="">Select Service</option>
+          <option>Laundry</option>
+          <option>Wash & Press</option>
+          <option>Dry Cleaning</option>
+          <option>Ironing</option>
+          <option>Roll Press</option>
+          <option>Shoes Cleaning</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <textarea id="message" class="form-control" rows="3"
+          placeholder="Extra Message (Optional)"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-success w-100">
+        Submit Booking
+      </button>
+
+    </form>
+
+    <p id="status" class="text-center mt-3"></p>
+
+  </div>
+
+</section>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/918879347028" target="_blank"
+   style="position:fixed;bottom:20px;right:20px;
+          background:#25D366;color:white;
+          padding:12px 16px;border-radius:50%;
+          font-size:22px;text-decoration:none;">
+  💬
+</a>
+
+<!-- FOOTER -->
+<footer class="bg-dark text-white text-center p-3">
+
+  <p class="mb-0">
+    © 2026 FirstIron Laundry Services | All Rights Reserved
+  </p>
+
+</footer>
+
+<!-- SCRIPT -->
+<script src="script.js"></script>
+
+</body>
+>>>>>>> 6c5336af878f66a76450a87f18cf8c3633f0941a
 </html>
