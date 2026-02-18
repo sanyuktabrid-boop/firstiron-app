@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import AWS from "aws-sdk";
 import bodyParser from "body-parser";
@@ -7,6 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 // Middleware
+app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
@@ -18,11 +20,10 @@ AWS.config.update({
 // DynamoDB
 const dynamo = new AWS.DynamoDB.DocumentClient();
 
-const TABLE = "firstironcontacts"; // change this
+const TABLE = "firstironcontacts";
 
 // API Route
 app.post("/book", async (req, res) => {
-
   const { name, email, message, phone, service } = req.body;
 
   const params = {
@@ -39,7 +40,6 @@ app.post("/book", async (req, res) => {
   };
 
   try {
-
     await dynamo.put(params).promise();
 
     res.json({
@@ -47,17 +47,15 @@ app.post("/book", async (req, res) => {
     });
 
   } catch (err) {
-
     console.error(err);
 
     res.status(500).json({
       error: "Failed to save booking"
     });
   }
-
 });
 
 // Start server
 app.listen(PORT, () => {
-  console.log("Server running on", PORT);
+  console.log("Server running on port", PORT);
 });

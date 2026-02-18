@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "firstiron-app",
   "version": "1.0.0",
@@ -15,4 +16,20 @@
     "body-parser": "^1.20.2",
     "cors": "^2.8.5"
   }
+=======
+{
+  "name": "firstiron-app",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "aws-sdk": "^2.1500.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5"
+  }
+>>>>>>> aba15225ccfbae97acce8967efddea5322f38d41
 }
