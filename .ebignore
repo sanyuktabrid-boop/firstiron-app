@@ -1,0 +1,7 @@
+node_modules/
+.git/
+.vscode/
+*.log
+package-lock.json
+/.venv/
+/.env
