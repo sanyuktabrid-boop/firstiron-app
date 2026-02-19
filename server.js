@@ -20,6 +20,10 @@ AWS.config.update({
 // DynamoDB
 const dynamo = new AWS.DynamoDB.DocumentClient();
 
+// SNS
+const sns = new AWS.SNS();
+const OWNER_TOPIC_ARN = process.env.OWNER_TOPIC_ARN || "";
+const CUSTOMER_TOPIC_ARN = process.env.CUSTOMER_TOPIC_ARN || "";
 const TABLE = "firstironcontacts";
 
 // API Route
@@ -42,9 +46,41 @@ app.post("/book", async (req, res) => {
   try {
     await dynamo.put(params).promise();
 
-    res.json({
-      message: "Booking Successful"
-    });
+    // Publish notification to owner (from customer)
+    const ownerMessage = `New booking from ${name} (${email || phone})\nService: ${service}\nMessage: ${message || "(no message)"}`;
+    if (OWNER_TOPIC_ARN) {
+      try {
+        await sns.publish({
+          TopicArn: OWNER_TOPIC_ARN,
+          Subject: "New Booking Received",
+          Message: ownerMessage
+        }).promise();
+      } catch (snsErr) {
+        console.error("Failed to publish to owner SNS topic:", snsErr);
+      }
+    }
+
+    // Publish confirmation to customer (from owner)
+    const customerMessage = `Hi ${name},\n\nThanks for your booking for '${service}'. We have received your request and will contact you shortly.\n\nRegards,\nOwner`;
+    if (CUSTOMER_TOPIC_ARN) {
+      try {
+        await sns.publish({
+          TopicArn: CUSTOMER_TOPIC_ARN,
+          Subject: "Booking Confirmation",
+          Message: customerMessage,
+          MessageAttributes: {
+            recipientEmail: {
+              DataType: "String",
+              StringValue: email || ""
+            }
+          }
+        }).promise();
+      } catch (snsErr) {
+        console.error("Failed to publish to customer SNS topic:", snsErr);
+      }
+    }
+
+    res.json({ message: "Booking Successful" });
 
   } catch (err) {
     console.error(err);
