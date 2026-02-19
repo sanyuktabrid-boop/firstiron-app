@@ -1,58 +1,71 @@
-// WhatsApp Booking
-function orderNow() {
-  const number = "918879347028";
-  const message = "Hello FirstIron, I want to book a laundry pickup. Please contact me.";
-  const url = "https://wa.me/" + number + "?text=" + encodeURIComponent(message);
+// ================= FORCE HIDE LOGIN =================
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("loginSection").style.display = "none";
+});
 
-  window.open(url, "_blank");
+// ================= WHATSAPP =================
+function orderNow() {
+  window.open("https://wa.me/918879347028");
 }
 
-// Website Booking Form
-async function submitForm(event) {
-  event.preventDefault(); // Stop page reload
+// ================= BOOKING =================
+async function submitForm(e) {
+  e.preventDefault();
 
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
   const phone = document.getElementById("phone").value;
   const service = document.getElementById("service").value;
-  const statusDisplay = document.getElementById("status"); // Reference to the status message element
+  const status = document.getElementById("status");
 
-  if (!name || !phone || !service) {
-    statusDisplay.innerText = "Please fill all required fields.";
-    statusDisplay.style.color = "red";
-    return;
+  await fetch("http://localhost:8080/book", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ name, email, phone, service })
+  });
+
+  status.innerText = "Booking Done! Check your email to confirm.";
+}
+
+// ================= LOGIN =================
+function login() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  const status = document.getElementById("loginStatus");
+
+  if (username === "admin" && password === "admin123") {
+    document.getElementById("adminPanel").style.display = "block";
+    document.getElementById("loginSection").style.display = "none";
+    status.innerText = "";
+  } else {
+    status.innerText = "Onlyowner can access";
+    status.style.color = "red";
   }
+}
 
-  const data = {
-    name,
-    email,
-    phone,
-    service
-  };
+// ================= SHOW LOGIN =================
+function showLogin() {
+  document.getElementById("loginSection").style.display = "block";
+}
 
-  try {
-    const response = await fetch("/book", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
+// ================= ADMIN ACTIONS =================
+async function markDelivery() {
+  const status = document.getElementById("adminStatus");
 
-    const result = await response.json();
+  await fetch("/delivery-done", { method: "POST" });
+  status.innerText = "Delivery sent";
+}
 
-    // Show success message on the page instead of an alert
-    statusDisplay.innerText = "Booking submitted successfully!";
-    statusDisplay.style.color = "green";
+async function markPayment() {
+  const status = document.getElementById("adminStatus");
 
-    console.log(result);
+  await fetch("/payment-done", { method: "POST" });
+  status.innerText = "Payment sent";
+}
 
-    // Clear form
-    document.getElementById("contactForm").reset();
+async function sendReminder() {
+  const status = document.getElementById("adminStatus");
 
-  } catch (error) {
-    console.error(error);
-    statusDisplay.innerText = "Error submitting booking. Please try again.";
-    statusDisplay.style.color = "red";
-  }
+  await fetch("/balance-reminder", { method: "POST" });
+  status.innerText = "Reminder sent";
 }
