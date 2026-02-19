@@ -28,6 +28,10 @@ const TABLE = "firstironcontacts";
 
 // API Route
 app.post("/book", async (req, res) => {
+
+  // 🔥 DEBUG LOG 1
+  console.log("📥 Incoming request:", req.body);
+
   const { name, email, message, phone, service } = req.body;
 
   const params = {
@@ -43,8 +47,15 @@ app.post("/book", async (req, res) => {
     }
   };
 
+  // 🔥 DEBUG LOG 2
+  console.log("📦 Data to save:", params);
+
   try {
+    console.log("⏳ Saving to DynamoDB...");
+
     await dynamo.put(params).promise();
+
+    console.log("✅ Saved successfully!");
 
     // Publish notification to owner (from customer)
     const ownerMessage = `New booking from ${name} (${email || phone})\nService: ${service}\nMessage: ${message || "(no message)"}`;
@@ -83,7 +94,7 @@ app.post("/book", async (req, res) => {
     res.json({ message: "Booking Successful" });
 
   } catch (err) {
-    console.error(err);
+    console.error("❌ DynamoDB Error:", err);
 
     res.status(500).json({
       error: "Failed to save booking"
@@ -93,5 +104,5 @@ app.post("/book", async (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log("Server running on port", PORT);
+  console.log("🚀 Server running on port", PORT);
 });

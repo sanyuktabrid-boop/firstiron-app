@@ -31,6 +31,7 @@ nav a {
   max-width: 1000px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: block;
 }
 
 button {
@@ -83,4 +84,122 @@ input, textarea, select {
   width: 120px;
   height: auto;
   margin-bottom: 10px;
+}
+
+/* ================= UPGRADE (SAFE OVERRIDES) ================= */
+
+/* Dark Premium Header */
+header {
+  background: linear-gradient(to right, #141e30, #243b55) !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Navbar improvement */
+nav {
+  background: #0f172a !important;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav a {
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #38bdf8;
+}
+
+/* Section modern look */
+.section {
+  border-radius: 15px !important;
+  transition: 0.3s;
+}
+
+.section:hover {
+  transform: translateY(-5px);
+}
+
+/* Buttons upgrade */
+button {
+  border-radius: 25px !important;
+  font-weight: 500;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* Form styling */
+input, textarea, select {
+  border-radius: 10px !important;
+  transition: 0.3s;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 5px rgba(59,130,246,0.5);
+  outline: none;
+}
+
+/* Table header dark */
+th {
+  background: #1e293b;
+  color: white;
+}
+
+/* WhatsApp button upgrade */
+.whatsapp {
+  border-radius: 50px !important;
+  padding: 14px !important;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.whatsapp:hover {
+  transform: scale(1.1);
+}
+
+/* Hide login section by default */
+#loginSection {
+  display: none;
+}
+
+/* Smooth UI */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.section {
+  background: rgba(255,255,255,0.9) !important;
+  backdrop-filter: blur(5px);
+}
+
+body {
+  position: relative;
+  background: url('https://images.openai.com/static-rsc-3/jdZewbWR4DL1jBAJGqAkXGHocOYVfTdM3RomM-LFwS_pPh_r-E_Cp4n0u5mmn3nd47TuJB8xSsdmG15skXl0zEnJdtJMQTRM6UA7_lL46aU?purpose=fullsize&v=1') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Overlay to reduce opacity effect */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2); /* 👈 adjust opacity here */
+  z-index: -1;
+}
+
+/* Keep your section clean */
+.section {
+  background: rgba(255,255,255,0.92) !important;
 }
